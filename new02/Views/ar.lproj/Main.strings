@@ -1,0 +1,9 @@
+
+/* Class = "UIButton"; configuration.title = "Next"; ObjectID = "YzZ-nR-7FR"; */
+"YzZ-nR-7FR.configuration.title" = "Next";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "YzZ-nR-7FR"; */
+"YzZ-nR-7FR.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "ed6-Ca-4yl"; */
+"ed6-Ca-4yl.text" = "Label";
