@@ -7,31 +7,25 @@
 
 import UIKit
 import CoreData
+import MOLH
+
+
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate  {
+   
+    
 
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        
-        
-        if Locale.preferredLanguages[0] == "ar"{
-            UIView.appearance().semanticContentAttribute = .forceRightToLeft
-            UIPageControl.appearance().semanticContentAttribute = .forceRightToLeft
-            UICollectionView.appearance().semanticContentAttribute = .forceRightToLeft
-            
-        }else{
-            UIView.appearance().semanticContentAttribute = .forceLeftToRight
-            UIPageControl.appearance().semanticContentAttribute = .forceLeftToRight
-            UICollectionView.appearance().semanticContentAttribute = .forceLeftToRight
-        }
-        
-        
+       
         return true
     }
+   
+   
     
 
     // MARK: UISceneSession Lifecycle

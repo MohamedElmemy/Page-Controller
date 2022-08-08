@@ -6,36 +6,41 @@
 //
 
 import UIKit
+import MOLH
 
 class inboardingViewController: UIViewController , UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
-  
+    
+    @IBOutlet weak var LanguageButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var Nextbtn: UIButton!
     @IBOutlet weak var pageControl: UIPageControl!
     
     var slides : [onboardingSlide] = []
+    
+    
     var currentPage = 0{
         didSet{
             pageControl.currentPage = currentPage
-            if currentPage == slides.count - 1 {
-                Nextbtn.setTitle("Get Started".localized, for: .normal)
-            }else {
+            if currentPage != slides.count - 1 {
                 Nextbtn.setTitle("Next".localized, for: .normal)
+                
+            }else {
+                Nextbtn.setTitle("Get Started".localized, for: .normal)
             }
         }
     }
     
-
+    
     
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        LanguageButton.setTitle("LanguageButton".localized , for: .normal)
         
-     
-
         slides = [onboardingSlide(image: UIImage(named: "Image1")! , description: "image1".localized) ,
                   onboardingSlide(image: UIImage(named: "Image2")!, description: "image2".localized) ,
                   onboardingSlide(image: UIImage(named: "Image3")!, description: "image3".localized) ,
@@ -44,24 +49,29 @@ class inboardingViewController: UIViewController , UICollectionViewDelegate , UI
         ]
         
         
-       
+        
         pageControl.numberOfPages = slides.count
-
+        
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         Nextbtn.setTitle("Next".localized, for: .normal)
-//        Nextbtn.setTitle("GetStarted".localized, for: .normal)
+        //     Nextbtn.setTitle("Get Started".localized, for: .normal)
     }
     
     
     @IBAction func nextBtnPressed(_ sender: UIButton) {
         
         if currentPage == slides.count - 1 {
-            let controller = storyboard?.instantiateViewController(withIdentifier: "HomeNC") as! UINavigationController
-//            controller.modalPresentationStyle = .fullScreen
-            present(controller, animated: true, completion: nil)
+            //            let controller = storyboard?.instantiateViewController(withIdentifier: "HomeNC") as! UINavigationController
+            ////            controller.modalPresentationStyle = .fullScreen
+            //            present(controller, animated: true, completion: nil)
+            
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Auth", bundle: nil)
+            let newViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+            
+            self.navigationController?.pushViewController(newViewController, animated: true)
         }else{
             
             currentPage += 1
@@ -69,9 +79,34 @@ class inboardingViewController: UIViewController , UICollectionViewDelegate , UI
             collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         }
         
-   
+        
     }
     
+    @IBAction func Changelanguage(_ sender: Any) {
+        
+        
+        let alert = UIAlertController(title: "Alert".localized, message: "Message".localized, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Launch the Missile".localized, style: UIAlertAction.Style.destructive, handler: { action in
+            
+            
+            MOLH.setLanguageTo(MOLHLanguage.currentAppleLanguage() == "en" ? "ar" : "en")
+            MOLH.reset()
+            
+            
+            //            let newLang = currrentLang == "en" ? "ar" : "en"
+            //            UserDefaults.standard.setValue([newLang], forKey: "AppleLanguages")
+            //
+            //
+            
+            
+        }))
+        
+        
+        
+        self.present(alert, animated: true, completion: nil)
+        
+        
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return slides.count
@@ -86,18 +121,23 @@ class inboardingViewController: UIViewController , UICollectionViewDelegate , UI
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
     }
- 
+    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-//        let width = scrollView.frame.width
-//        currentPage = Int(scrollView.contentOffset.x / width)
-        if  slides.count - 1 != currentPage {
-            currentPage += 1
-            let indexPath = IndexPath(item: currentPage, section: 0)
-            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        }
-   
+        let width = scrollView.frame.width
+        currentPage = Int(scrollView.contentOffset.x / width)
+        
+        //
+        //        if  slides.count - 1 != currentPage {
+        //            currentPage += 1
+        //            let indexPath = IndexPath(item: currentPage, section: 0)
+        //            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        ////        }else{
+        ////            currentPage -= 1
+        ////
+        //        }
+        
         
     }
-
-
+    
+    
 }

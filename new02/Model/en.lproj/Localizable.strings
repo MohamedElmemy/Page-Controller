@@ -5,7 +5,7 @@
   Created by El-Memy on 03/08/2022.
   
 */
-"lang" = "en";
+//"lang" = "en";
 
 "Next" = "Next";
 "image1" = "image1";
@@ -14,3 +14,6 @@
 "image4" = "image4";
 "image5" = "image5";
 "Get Started" = "Get Started";
+"LanguageButton" = "Lang: العربية" ;
+
+

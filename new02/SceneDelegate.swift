@@ -6,8 +6,8 @@
 //
 
 import UIKit
-
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+import MOLH
+class SceneDelegate: UIResponder, UIWindowSceneDelegate,MOLHResetable {
 
     var window: UIWindow?
 
@@ -16,7 +16,36 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        
+        MOLH.shared.activate(true)
+        
+        changeLang()
+        
         guard let _ = (scene as? UIWindowScene) else { return }
+    }
+    
+    func changeLang(){
+        if MOLHLanguage.currentAppleLanguage() == "ar"{
+            UIPageControl.appearance().semanticContentAttribute = .forceRightToLeft
+            UIView.appearance().semanticContentAttribute = .forceRightToLeft
+            UICollectionView.appearance().semanticContentAttribute = .forceRightToLeft
+        }else{
+            UIPageControl.appearance().semanticContentAttribute = .forceLeftToRight
+            UIView.appearance().semanticContentAttribute = .forceLeftToRight
+            UICollectionView.appearance().semanticContentAttribute = .forceLeftToRight
+        }
+    }
+    
+    func reset() {
+      
+        changeLang()
+
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "inboardingViewController") as! inboardingViewController
+        let nav = UINavigationController(rootViewController: newViewController)
+        nav.navigationBar.isHidden = true
+        self.window?.rootViewController = nav
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
