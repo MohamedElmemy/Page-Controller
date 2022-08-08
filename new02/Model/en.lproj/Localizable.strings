@@ -15,5 +15,7 @@
 "image5" = "image5";
 "Get Started" = "Get Started";
 "LanguageButton" = "Lang: العربية" ;
-
-
+"Alert" = "Alert" ;
+"Message" = "Message" ;
+"Launch" = "Language changed successfully
+";

@@ -57,7 +57,7 @@ class inboardingViewController: UIViewController , UICollectionViewDelegate , UI
     
     override func viewWillAppear(_ animated: Bool) {
         Nextbtn.setTitle("Next".localized, for: .normal)
-        //     Nextbtn.setTitle("Get Started".localized, for: .normal)
+      
     }
     
     
@@ -86,17 +86,14 @@ class inboardingViewController: UIViewController , UICollectionViewDelegate , UI
         
         
         let alert = UIAlertController(title: "Alert".localized, message: "Message".localized, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Launch the Missile".localized, style: UIAlertAction.Style.destructive, handler: { action in
+        alert.addAction(UIAlertAction(title: "Launch".localized, style: UIAlertAction.Style.destructive, handler: { action in
             
             
             MOLH.setLanguageTo(MOLHLanguage.currentAppleLanguage() == "en" ? "ar" : "en")
             MOLH.reset()
             
             
-            //            let newLang = currrentLang == "en" ? "ar" : "en"
-            //            UserDefaults.standard.setValue([newLang], forKey: "AppleLanguages")
-            //
-            //
+          
             
             
         }))
@@ -126,18 +123,10 @@ class inboardingViewController: UIViewController , UICollectionViewDelegate , UI
         let width = scrollView.frame.width
         currentPage = Int(scrollView.contentOffset.x / width)
         
-        //
-        //        if  slides.count - 1 != currentPage {
-        //            currentPage += 1
-        //            let indexPath = IndexPath(item: currentPage, section: 0)
-        //            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        ////        }else{
-        ////            currentPage -= 1
-        ////
-        //        }
+           }
         
         
     }
     
     
-}
+
